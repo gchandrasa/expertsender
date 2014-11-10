@@ -16,8 +16,8 @@ SUBSCRIBE_IGNORE_AND_UPDATE = 'IgnoreAndUpdate'
 SUBSCRIBE_IGNORE_AND_REPLACE = 'IgnoreAndReplace'
 
 
-def subscribe(api_key, email, list_id, fields, extra_fields=None, mode=SUBSCRIBE_ADD_AND_UPDATE):
-    xml = generate_subscribe_xml(api_key, email, list_id, extra_fields, mode)
+def subscribe(api_key, email, list_id, fields, custom_fields=None, mode=SUBSCRIBE_ADD_AND_UPDATE):
+    xml = generate_subscribe_xml(api_key, email, list_id, fields, custom_fields, mode)
     headers = {'Content-Type': 'application/xml'}
     return requests.post('%s/Api/Subscribers/' % API_SERVER, data=xml, headers=headers)
 

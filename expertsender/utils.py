@@ -4,7 +4,7 @@ from lxml import etree
 xsi = 'http://www.w3.org/2001/XMLSchema-instance'
 
 
-def generate_subscribe_xml(api_key, email, list_id, fields, mode, extra_fields=None):
+def generate_subscribe_xml(api_key, email, list_id, fields, custom_fields, mode):
     """
         extra_fields should be list of dictionaries. Example:
         extra_fields = [{'id': 1, 'type': 'string', 'value': 'hello'}]
@@ -22,9 +22,9 @@ def generate_subscribe_xml(api_key, email, list_id, fields, mode, extra_fields=N
         etree.SubElement(subscriber, key).text = value
 
     # Custom fields
-    if extra_fields:
+    if custom_fields:
         properties = etree.SubElement(subscriber, 'Properties')
-        for item in extra_fields:
+        for item in custom_fields:
             property = etree.SubElement(properties, 'Property')
             etree.SubElement(property, 'Id').text = item['id']
             etree.SubElement(property, 'Value', attrib={'{%s}type' % xsi: 'xs:%s' % item['type']}).text = item['value']
