@@ -11,6 +11,7 @@ from .subscribers import (SUBSCRIBE_ADD_AND_UPDATE, SUBSCRIBE_ADD_AND_REPLACE,
 xsi = 'http://www.w3.org/2001/XMLSchema-instance'
 
 API_SERVER = getattr(settings, 'EXPERTSENDER_API_SERVER', 'https://api2.esv2.com')
+TIMEOUT = getattr(settings, 'EXPERTSENDER_TIMEOUT', 5)
 
 
 def send_email(api_key, email, transactional_id, list_id=None, options=None):
@@ -32,6 +33,6 @@ def send_email(api_key, email, transactional_id, list_id=None, options=None):
             etree.SubElement(snippet_tree, 'Value').text = snippet['value']
     xml = etree.tostring(doc)
     headers = {'Content-Type': 'application/xml'}
-    response = requests.post('%s/Api/Transactionals/%s' % (API_SERVER, transactional_id), data=xml, headers=headers)
+    response = requests.post('%s/Api/Transactionals/%s' % (API_SERVER, transactional_id), data=xml, headers=headers, timeout=TIMEOUT)
 
     return response

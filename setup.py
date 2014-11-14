@@ -10,7 +10,7 @@ except ImportError:
 
 setup(
     name='expertsender',
-    version='0.1.1',
+    version='0.1.2',
     description='Python API library for the ExpertSender email platform',
     author='Gilang Chandrasa',
     author_email='gilang@launchpotato.com',
